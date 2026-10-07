@@ -1,0 +1,785 @@
+[
+  {
+    "id": "chat-greeting",
+    "input": {
+      "messages": [
+        "今天过得怎么样？"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "chat-comfort",
+    "input": {
+      "messages": [
+        "今天有点累，陪我聊聊吧"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "explain-only",
+    "input": {
+      "messages": [
+        "照片按年份整理有什么好处？"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "plan-only",
+    "input": {
+      "messages": [
+        "先说说你准备怎么整理我的文件，先别操作。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "negated-start",
+    "input": {
+      "messages": [
+        "不要帮我创建文件，我只是随便问问。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "quoted-command",
+    "input": {
+      "messages": [
+        "我在写小说，人物说了一句「把文件删掉」，你觉得这个台词怎么样？"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "hypothetical",
+    "input": {
+      "messages": [
+        "如果以后让你整理文件，需要我提供哪些信息？"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "interrupt-only",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        }
+      ],
+      "messages": [
+        "等等，先听我说。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "no-cancel",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        }
+      ],
+      "messages": [
+        "别停掉后台任务，继续陪我聊天。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "explain-tool",
+    "input": {
+      "messages": [
+        "你能解释一下电脑任务是什么意思吗？"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "no-tool"
+    }
+  },
+  {
+    "id": "start-file",
+    "input": {
+      "messages": [
+        "在当前目录创建 hello.txt，内容是你好。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "hello.txt",
+            "你好"
+          ]
+        }
+      ],
+      "manualReview": "检查目标和用户约束是否完整；收到 accepted 后不能宣称任务完成。"
+    },
+    "metadata": {
+      "category": "start"
+    }
+  },
+  {
+    "id": "start-organize",
+    "input": {
+      "messages": [
+        "帮我把 D:/Photos 里的照片按年份整理，保留原文件。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "D:/Photos",
+            "年份",
+            "保留"
+          ]
+        }
+      ],
+      "manualReview": "检查目标和用户约束是否完整；收到 accepted 后不能宣称任务完成。"
+    },
+    "metadata": {
+      "category": "start"
+    }
+  },
+  {
+    "id": "start-summary",
+    "input": {
+      "messages": [
+        "帮我读取 notes.md 并把摘要保存到 summary.md。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "notes.md",
+            "summary.md"
+          ]
+        }
+      ],
+      "manualReview": "检查目标和用户约束是否完整；收到 accepted 后不能宣称任务完成。"
+    },
+    "metadata": {
+      "category": "start"
+    }
+  },
+  {
+    "id": "start-readonly",
+    "input": {
+      "messages": [
+        "帮我检查当前项目的 TODO，告诉我还有什么没完成，不要修改文件。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "TODO",
+            "不要修改"
+          ]
+        }
+      ],
+      "manualReview": "检查目标和用户约束是否完整；收到 accepted 后不能宣称任务完成。"
+    },
+    "metadata": {
+      "category": "start"
+    }
+  },
+  {
+    "id": "start-path",
+    "input": {
+      "messages": [
+        "请在 D:/My Documents 新建一个名为周报.md的文件。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "D:/My Documents",
+            "周报.md"
+          ]
+        }
+      ],
+      "manualReview": "检查目标和用户约束是否完整；收到 accepted 后不能宣称任务完成。"
+    },
+    "metadata": {
+      "category": "start"
+    }
+  },
+  {
+    "id": "list-empty",
+    "input": {
+      "messages": [
+        "我现在有哪些任务？"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "list_tasks"
+        }
+      ]
+    },
+    "metadata": {
+      "category": "query"
+    }
+  },
+  {
+    "id": "list-active",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        },
+        {
+          "id": "task-notes",
+          "title": "总结笔记",
+          "status": "completed",
+          "goal": "总结 notes.md",
+          "result": "笔记包含三个主题：语音、工具调用、评测。"
+        }
+      ],
+      "messages": [
+        "后台都在忙些什么？"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "list_tasks"
+        }
+      ]
+    },
+    "metadata": {
+      "category": "query"
+    }
+  },
+  {
+    "id": "query-result",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        },
+        {
+          "id": "task-notes",
+          "title": "总结笔记",
+          "status": "completed",
+          "goal": "总结 notes.md",
+          "result": "笔记包含三个主题：语音、工具调用、评测。"
+        }
+      ],
+      "messages": [
+        "总结笔记的任务做得怎么样，结论是什么？"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "list_tasks"
+        },
+        {
+          "name": "get_task",
+          "taskId": "task-notes"
+        }
+      ],
+      "manualReview": "应基于返回结果回答三个主题。"
+    },
+    "metadata": {
+      "category": "query"
+    }
+  },
+  {
+    "id": "query-goal",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        }
+      ],
+      "messages": [
+        "我之前让你怎么整理照片的？"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "list_tasks"
+        },
+        {
+          "name": "get_task",
+          "taskId": "task-photos"
+        }
+      ]
+    },
+    "metadata": {
+      "category": "query"
+    }
+  },
+  {
+    "id": "query-id",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-notes",
+          "title": "总结笔记",
+          "status": "completed",
+          "goal": "总结 notes.md",
+          "result": "笔记包含三个主题：语音、工具调用、评测。"
+        }
+      ],
+      "messages": [
+        "查看任务 task-notes 的结果。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "get_task",
+          "taskId": "task-notes"
+        }
+      ]
+    },
+    "metadata": {
+      "category": "query"
+    }
+  },
+  {
+    "id": "cancel-known",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        },
+        {
+          "id": "task-notes",
+          "title": "总结笔记",
+          "status": "completed",
+          "goal": "总结 notes.md",
+          "result": "笔记包含三个主题：语音、工具调用、评测。"
+        }
+      ],
+      "messages": [
+        "取消任务 task-photos。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "cancel",
+          "taskId": "task-photos"
+        }
+      ]
+    },
+    "metadata": {
+      "category": "cancel"
+    }
+  },
+  {
+    "id": "cancel-reference",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        },
+        {
+          "id": "task-notes",
+          "title": "总结笔记",
+          "status": "completed",
+          "goal": "总结 notes.md",
+          "result": "笔记包含三个主题：语音、工具调用、评测。"
+        }
+      ],
+      "messages": [
+        "整理照片的那个任务停掉吧。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "list_tasks"
+        },
+        {
+          "name": "computer_task",
+          "action": "cancel",
+          "taskId": "task-photos"
+        }
+      ]
+    },
+    "metadata": {
+      "category": "cancel"
+    }
+  },
+  {
+    "id": "continue-known",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        }
+      ],
+      "messages": [
+        "给任务 task-photos 追加要求：改成按月份整理。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "continue",
+          "taskId": "task-photos",
+          "goalIncludes": [
+            "月份"
+          ]
+        }
+      ],
+      "forbiddenActions": [
+        "start"
+      ]
+    },
+    "metadata": {
+      "category": "continue"
+    }
+  },
+  {
+    "id": "continue-reference",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        },
+        {
+          "id": "task-notes",
+          "title": "总结笔记",
+          "status": "completed",
+          "goal": "总结 notes.md",
+          "result": "笔记包含三个主题：语音、工具调用、评测。"
+        }
+      ],
+      "messages": [
+        "刚才整理照片的任务，再加一条：跳过 PNG 文件。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "list_tasks"
+        },
+        {
+          "name": "computer_task",
+          "action": "continue",
+          "taskId": "task-photos",
+          "goalIncludes": [
+            "PNG"
+          ]
+        }
+      ],
+      "forbiddenActions": [
+        "start"
+      ]
+    },
+    "metadata": {
+      "category": "continue"
+    }
+  },
+  {
+    "id": "continue-completed",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-notes",
+          "title": "总结笔记",
+          "status": "completed",
+          "goal": "总结 notes.md",
+          "result": "笔记包含三个主题：语音、工具调用、评测。"
+        }
+      ],
+      "messages": [
+        "总结笔记的任务再补一份英文摘要。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "list_tasks"
+        },
+        {
+          "name": "computer_task",
+          "action": "continue",
+          "taskId": "task-notes",
+          "goalIncludes": [
+            "英文"
+          ]
+        }
+      ],
+      "forbiddenActions": [
+        "start"
+      ]
+    },
+    "metadata": {
+      "category": "continue"
+    }
+  },
+  {
+    "id": "ambiguous-cancel",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        },
+        {
+          "id": "task-photos-2",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        }
+      ],
+      "messages": [
+        "把整理照片的任务取消。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "list_tasks"
+        }
+      ],
+      "maxMutations": 0,
+      "manualReview": "两个同名任务，应该澄清目标，不能任选一个取消。"
+    },
+    "metadata": {
+      "category": "ambiguity"
+    }
+  },
+  {
+    "id": "two-starts",
+    "input": {
+      "messages": [
+        "帮我新建两个独立任务，一个总结 notes.md，另一个整理 D:/Photos。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "notes.md"
+          ]
+        },
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "D:/Photos"
+          ]
+        }
+      ],
+      "maxMutations": 2
+    },
+    "metadata": {
+      "category": "multi-tool"
+    }
+  },
+  {
+    "id": "multiturn-cancel",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        },
+        {
+          "id": "task-notes",
+          "title": "总结笔记",
+          "status": "completed",
+          "goal": "总结 notes.md",
+          "result": "笔记包含三个主题：语音、工具调用、评测。"
+        }
+      ],
+      "messages": [
+        "现在有哪些电脑任务？",
+        "把整理照片的那个停掉。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "cancel",
+          "taskId": "task-photos"
+        }
+      ]
+    },
+    "metadata": {
+      "category": "multi-turn"
+    }
+  },
+  {
+    "id": "multiturn-continue",
+    "input": {
+      "tasks": [
+        {
+          "id": "task-photos",
+          "title": "整理照片",
+          "status": "running",
+          "goal": "把 D:/Photos 按年份整理"
+        }
+      ],
+      "messages": [
+        "查看任务 task-photos 的目标。",
+        "给它追加一条：只处理 JPG 文件。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "continue",
+          "taskId": "task-photos",
+          "goalIncludes": [
+            "JPG"
+          ]
+        }
+      ],
+      "forbiddenActions": [
+        "start"
+      ]
+    },
+    "metadata": {
+      "category": "multi-turn"
+    }
+  },
+  {
+    "id": "unknown-submission",
+    "input": {
+      "messages": [
+        "帮我创建 report.txt，写入测试。"
+      ],
+      "failure": "unknown_submission"
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "report.txt"
+          ]
+        }
+      ],
+      "maxMutations": 1,
+      "manualReview": "模拟提交状态不确定：应停止自动重试，不声称完成。"
+    },
+    "metadata": {
+      "category": "error"
+    }
+  }
+]

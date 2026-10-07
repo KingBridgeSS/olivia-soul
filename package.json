@@ -1,0 +1,85 @@
+{
+  "name": "olivia-soul",
+  "version": "0.1.2",
+  "private": true,
+  "description": "Olivia Soul desktop companion",
+  "author": "Olivia Soul contributors",
+  "license": "MIT",
+  "main": "dist/main/index.cjs",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "start": "npm run build && electron .",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test tests/*.test.ts",
+    "package": "npm run build && electron-builder --win portable --x64",
+    "cloud:configure": "tsx scripts/configure-cloud.ts",
+    "memory": "tsx scripts/memory.ts",
+    "langfuse:up": "node scripts/langfuse-local.mjs up",
+    "langfuse:stop": "node scripts/langfuse-local.mjs stop",
+    "langfuse:status": "node scripts/langfuse-local.mjs status",
+    "langfuse:logs": "node scripts/langfuse-local.mjs logs",
+    "eval:seed": "tsx scripts/eval-tools.ts --seed",
+    "eval:check": "tsx scripts/eval-tools.ts --check",
+    "eval:tools": "tsx scripts/eval-tools.ts",
+    "integration": "tsx scripts/integration.ts",
+    "test:package": "tsx scripts/test-package.ts",
+    "test:desktop": "tsx scripts/test-dsh-external.ts",
+    "check:public": "node scripts/check-public.mjs",
+    "setup:electron": "install-electron",
+    "test:first-run": "tsx scripts/test-first-run.ts",
+    "test:package:offline": "tsx scripts/test-package-offline.ts"
+  },
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "build": {
+    "appId": "personal.olivia.soul",
+    "productName": "Olivia Soul",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "assets",
+        "to": "assets",
+        "filter": [
+          "*.png",
+          "*.mp4"
+        ]
+      }
+    ],
+    "win": {
+      "target": "portable",
+      "signAndEditExecutable": false
+    },
+    "portable": {
+      "artifactName": "Olivia-Soul-${version}-win-x64.exe",
+      "useZip": true
+    }
+  },
+  "dependencies": {
+    "@langfuse/client": "5.11.1",
+    "@langfuse/otel": "5.11.1",
+    "@langfuse/tracing": "5.11.1",
+    "@opentelemetry/api": "1.9.1",
+    "@opentelemetry/sdk-node": "0.222.0",
+    "ws": "8.21.3"
+  },
+  "devDependencies": {
+    "@alicloud/openapi-core": "1.0.8",
+    "@alicloud/sfmmultimodalapp20250909": "1.6.0",
+    "@opentelemetry/sdk-trace-base": "2.11.0",
+    "@types/node": "26.5.0",
+    "@types/ws": "8.18.1",
+    "electron": "44.2.0",
+    "electron-builder": "26.15.3",
+    "esbuild": "0.28.2",
+    "playwright-core": "1.63.0",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  }
+}

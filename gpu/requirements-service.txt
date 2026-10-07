@@ -1,0 +1,5 @@
+# Install after the pinned FlashHead checkout requirements (see docs/gpu.md).
+# Adapter-only pins, not a complete CUDA/model environment lock.
+fastapi==0.115.12
+uvicorn[standard]==0.34.2
+av==14.4.0

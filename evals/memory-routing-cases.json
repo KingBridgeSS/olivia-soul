@@ -1,0 +1,10 @@
+[
+  {"id":"interview-1","input":{"messages":["下周二我有快手agent面试，请好好记住了"]},"expectedOutput":{"required":[],"noTools":true},"metadata":{"category":"personal-memory"}},
+  {"id":"interview-2","input":{"messages":["下周二我有快手agent面试，请好好记住了"]},"expectedOutput":{"required":[],"noTools":true},"metadata":{"category":"personal-memory"}},
+  {"id":"interview-3","input":{"messages":["下周二我有快手agent面试，请好好记住了"]},"expectedOutput":{"required":[],"noTools":true},"metadata":{"category":"personal-memory"}},
+  {"id":"preference","input":{"messages":["我不喜欢吃香菜，你以后要记住哦。"]},"expectedOutput":{"required":[],"noTools":true},"metadata":{"category":"personal-memory"}},
+  {"id":"remember-plan","input":{"messages":["帮我记一下，我周五下午三点要去学校参加毕业答辩。"]},"expectedOutput":{"required":[],"noTools":true},"metadata":{"category":"personal-memory"}},
+  {"id":"conversation-recall","input":{"messages":["我下周二有快手agent面试，请记住。","我刚才说的面试是哪家公司？"]},"expectedOutput":{"required":[],"noTools":true,"replyIncludes":["快手"]},"metadata":{"category":"conversation-recall"}},
+  {"id":"explicit-file","input":{"messages":["请在当前工作目录创建 interview.txt，写入：下周二有快手agent面试。"]},"expectedOutput":{"required":[{"name":"computer_task","action":"start","goalIncludes":["interview.txt"]}],"maxMutations":1},"metadata":{"category":"explicit-computer-task"}},
+  {"id":"explicit-calendar","input":{"messages":["请打开电脑上的日历应用，创建一个2026年9月15日下午三点的日程，标题是快手agent面试。"]},"expectedOutput":{"required":[{"name":"computer_task","action":"start","goalIncludes":["快手"]}],"maxMutations":1},"metadata":{"category":"explicit-computer-task"}}
+]

@@ -1,0 +1,187 @@
+[
+  {
+    "id": "unseen-memory-1",
+    "input": {
+      "messages": [
+        "我下个月要搬到杭州，帮我记在心里。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "personal-memory-paraphrase"
+    }
+  },
+  {
+    "id": "unseen-memory-2",
+    "input": {
+      "messages": [
+        "记一下，我妈妈的生日是10月18日。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "personal-memory-paraphrase"
+    }
+  },
+  {
+    "id": "unseen-memory-3",
+    "input": {
+      "messages": [
+        "以后回答我尽量用中文，这点请记住。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "personal-memory-paraphrase"
+    }
+  },
+  {
+    "id": "unseen-memory-4",
+    "input": {
+      "messages": [
+        "下周一下午两点我要去牙科复诊，别忘了这件事。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [],
+      "noTools": true
+    },
+    "metadata": {
+      "category": "personal-memory-paraphrase"
+    }
+  },
+  {
+    "id": "calendar-repeat-1",
+    "input": {
+      "messages": [
+        "请打开电脑上的日历应用，创建一个2026年9月15日下午三点的日程，标题是快手agent面试。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "快手"
+          ]
+        }
+      ],
+      "maxMutations": 1
+    },
+    "metadata": {
+      "category": "explicit-computer-task"
+    }
+  },
+  {
+    "id": "calendar-repeat-2",
+    "input": {
+      "messages": [
+        "请打开电脑上的日历应用，创建一个2026年9月15日下午三点的日程，标题是快手agent面试。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "快手"
+          ]
+        }
+      ],
+      "maxMutations": 1
+    },
+    "metadata": {
+      "category": "explicit-computer-task"
+    }
+  },
+  {
+    "id": "calendar-repeat-3",
+    "input": {
+      "messages": [
+        "请打开电脑上的日历应用，创建一个2026年9月15日下午三点的日程，标题是快手agent面试。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "start",
+          "goalIncludes": [
+            "快手"
+          ]
+        }
+      ],
+      "maxMutations": 1
+    },
+    "metadata": {
+      "category": "explicit-computer-task"
+    }
+  },
+  {
+    "id": "existing-task-continue",
+    "input": {
+      "tasks": [
+        {
+          "id": "fixture-123",
+          "title": "整理文件",
+          "status": "running"
+        }
+      ],
+      "messages": [
+        "请给任务 ID fixture-123 追加要求：按年份分组。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "continue",
+          "taskId": "fixture-123"
+        }
+      ],
+      "maxMutations": 1
+    },
+    "metadata": {
+      "category": "existing-task"
+    }
+  },
+  {
+    "id": "existing-task-cancel",
+    "input": {
+      "tasks": [
+        {
+          "id": "fixture-123",
+          "title": "整理文件",
+          "status": "running"
+        }
+      ],
+      "messages": [
+        "取消任务 ID fixture-123。"
+      ]
+    },
+    "expectedOutput": {
+      "required": [
+        {
+          "name": "computer_task",
+          "action": "cancel",
+          "taskId": "fixture-123"
+        }
+      ],
+      "maxMutations": 1
+    },
+    "metadata": {
+      "category": "existing-task"
+    }
+  }
+]

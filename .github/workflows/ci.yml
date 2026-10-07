@@ -1,0 +1,36 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm audit --audit-level=high --registry=https://registry.npmjs.org
+      - run: npm run setup:electron
+      - run: npm run check:public
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - run: npm run test:desktop
+      - run: npm run test:first-run
+  gpu-source:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+      - run: python -m py_compile gpu/avatar_service.py
+      - run: python gpu/avatar_service.py --help
+      - run: python gpu/test_service_options.py

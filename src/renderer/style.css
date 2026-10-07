@@ -1,0 +1,61 @@
+:root{color-scheme:light;font-family:"Segoe UI","Microsoft YaHei",sans-serif;color:#343b44;font-size:12px;background:transparent}
+*{box-sizing:border-box}
+html,body{width:100%;height:100%;margin:0;overflow:hidden;background:transparent}
+main{height:100%;padding:0 12px 8px;display:flex;flex-direction:column;gap:var(--gap);overflow:hidden;position:relative;background:#fff;border:1px solid #e8eaee;border-radius:16px;--gap:7px;--controls-h:44px;--pad-b:8px;--caption-h:65px;--caption-bottom:calc(var(--pad-b) + var(--controls-h) + var(--gap))}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer;border:1px solid #e7e8ec;background:#fff;color:#828a94;border-radius:8px;padding:7px;transition:background .15s,color .15s}
+button:hover{background:#f3f4f6;color:#303944}button:disabled{opacity:.4;cursor:default}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid #a6b8c5;outline-offset:1px}
+button svg{width:17px;height:17px;display:block;pointer-events:none}
+header{height:34px;flex:none;display:flex;justify-content:flex-end;align-items:center;-webkit-app-region:drag}
+nav,button,input,textarea,select{-webkit-app-region:no-drag}nav{display:flex;gap:1px}nav button{border:0;background:none;padding:5px;color:#9ba2aa}nav svg{width:15px;height:15px}
+.stage{flex:1;min-height:0;display:grid;place-items:center;container-type:size}
+.portrait{width:min(100cqw,100cqh);height:min(100cqw,100cqh);position:relative;overflow:hidden;border-radius:11px;background:#f4f5f6}
+.portrait img,.portrait video,.portrait canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center top;pointer-events:none}
+.portrait video,.portrait canvas{opacity:0;transition:opacity .24s ease}
+.portrait video{z-index:1}.portrait canvas{z-index:2}
+.portrait[data-mode=idle] video,.portrait[data-mode=speaking] canvas{opacity:1}
+.portrait[data-mode=speaking] video{opacity:1}
+p{margin:0}
+/* The caption keeps a fixed slot so spoken text never resizes or shifts the portrait. */
+.conversation{flex:none;height:var(--caption-h);padding:1px 3px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.conversation.empty{visibility:hidden}
+.caption{min-width:0}
+#subtitle{font-size:12px;line-height:1.65;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;color:#59616c}
+#heard{font-size:10px;color:#a0a7af;line-height:1.6;margin-bottom:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}#heard:empty{display:none}
+.controls{flex:none;height:var(--controls-h);display:flex;gap:12px;justify-content:space-between;align-items:center}
+.controls button{width:34px;height:34px;display:grid;place-items:center;border:0;border-radius:50%;background:#f6f7f9;padding:7px}
+.controls .primary{width:44px;height:44px;background:#303944;color:white}.controls .primary:hover{background:#4b5562}.controls .primary.connected{background:#edf0f3;color:#4b5562}
+.controls .link{background:none;width:28px;padding:5px}.controls .link:hover{background:#f4f5f7}
+.primary{background:#303944;color:#fff;border-color:#303944;font-weight:500}.primary:hover{background:#4b5562;color:#fff}.controls .muted{background:#fafafa;color:#b8bdc5}
+.link{border:none;background:none;padding:3px;color:#969da6;font-size:10px}
+#task-toggle{position:relative}#task-toggle.unread:after{content:"";position:absolute;right:3px;top:3px;width:4px;height:4px;border-radius:50%;background:#a48761;box-shadow:0 0 0 2px #fff}
+#task-toggle[aria-expanded=true],#settings-toggle[aria-expanded=true]{color:#48515d;background:#f3f4f6}
+#task{position:absolute;top:37px;left:12px;right:12px;z-index:6;max-height:calc(100% - 100px);overflow:auto;padding:12px;border:1px solid #e9ebef;border-radius:11px;background:#fff;box-shadow:0 8px 28px #27313e12}
+#task:focus{outline:none}.task-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}#task-status{font-size:10px;color:#89919c}
+#task-select{margin-top:10px}
+#cancel{border:0;background:none;padding:4px;color:#9198a2}#cancel svg{width:14px;height:14px}
+#task-title{font-size:11px;line-height:1.6;margin-top:7px;overflow-wrap:anywhere}
+#task-detail{font-size:10px;color:#89919c;line-height:1.7;margin-top:6px;max-height:140px;overflow:auto;white-space:pre-wrap;overflow-wrap:anywhere}
+.task-actions{display:flex;justify-content:flex-end;margin-top:8px}#task-open{padding:4px}#task-open svg,#task-close svg{width:15px;height:15px}
+#error{position:absolute;left:12px;right:12px;bottom:var(--caption-bottom);z-index:6;height:var(--caption-h);padding:2px 3px;background:#fff;font-size:10px;color:#a56b60;line-height:1.5;overflow:auto}
+#text-form{position:absolute;left:12px;right:12px;bottom:var(--caption-bottom);z-index:7;height:var(--caption-h);display:flex;gap:6px;align-items:center;background:#fff}
+#text{align-self:center;height:36px}#send{align-self:center;padding:8px}
+textarea{resize:none;flex:1;min-width:0}
+input,textarea,select{background:#fafbfc;border:1px solid #e5e7eb;border-radius:7px;padding:7px;color:#424a55;width:100%;font-size:11px}
+#settings{position:absolute;inset:37px 10px 59px;z-index:5;overflow:auto;padding:8px 5px;background:#fff;border-top:1px solid #f0f1f4}
+#settings::-webkit-scrollbar{width:3px}#settings::-webkit-scrollbar-thumb{background:#e3e6eb;border-radius:3px}
+.section-title{display:flex;align-items:center;justify-content:space-between;font-size:12px}.hint{font-size:10px;line-height:1.7;color:#9aa1a9;margin:8px 0}
+label{display:block;font-size:10px;color:#7c8590;margin:10px 0}label input,label select{margin-top:5px}input[type=checkbox]{width:auto;accent-color:#555f6b}
+.two{display:flex;gap:10px}.two label{flex:1;min-width:0}#save{width:100%;margin:7px 0}[hidden]{display:none!important}
+#memory{position:absolute;inset:37px 12px 59px;z-index:8;overflow:auto;background:#fff;padding:4px 3px 12px;border-top:1px solid #f0f1f4;scrollbar-width:thin}
+#memory .section-title{gap:8px;margin:4px 0 12px}#memory-back{padding:4px}#memory .section-title span{flex:1}
+#memory-toggle[aria-expanded=true]{color:#48515d;background:#f3f4f6}
+main.memory-open #error{z-index:9}
+.memory-toolbar{display:flex;gap:8px;align-items:center;margin-bottom:10px}.memory-toolbar select{flex:1}.memory-toolbar button{white-space:nowrap;font-size:11px}
+#memory-message{font-size:10px;line-height:1.7;padding:8px 0;color:#697c6f;overflow-wrap:anywhere}#memory-message.failed{color:#a56b60}
+#memory-editor{padding:0 0 12px;border-bottom:1px solid #eceef1}#memory-content{width:100%;min-height:105px;resize:vertical;line-height:1.7}
+.memory-item{padding:12px 0;border-bottom:1px solid #eceef1}.memory-item>p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:11px;line-height:1.8;color:#59616c}
+.memory-actions{display:flex;justify-content:flex-end;align-items:center;gap:8px;margin-top:8px}.memory-actions button{font-size:10px;padding:4px 8px}.memory-actions span{margin-right:auto;font-size:10px;color:#a56b60}
+.memory-pager{display:flex;align-items:center;justify-content:space-between;gap:5px;margin:14px 0;color:#9198a2;font-size:10px}.memory-pager button{font-size:10px;padding:5px}
+#memory-profile{border-top:1px solid #eceef1;padding-top:12px;font-size:10px;color:#8c949f}#memory-profile summary{cursor:pointer}#memory-profile-content p{margin:8px 0;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere}

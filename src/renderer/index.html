@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' blob:; media-src 'self' blob:; connect-src 'self'; worker-src 'self' blob:">
+<title>Olivia Soul</title><link rel="stylesheet" href="./style.css"></head>
+<body><main>
+  <header><nav><button id="memory-toggle" title="长期记忆" aria-label="长期记忆" aria-controls="memory" aria-expanded="false"></button><button id="task-toggle" title="电脑任务" aria-label="电脑任务" aria-controls="task" aria-haspopup="dialog" aria-expanded="false"></button><button id="settings-toggle" title="设置" aria-label="设置" aria-controls="settings" aria-expanded="false">⚙</button><button id="hide" title="收起到托盘" aria-label="收起到托盘">−</button></nav></header>
+  <div class="stage"><section class="portrait" data-mode="static"><img id="portrait" src="./portrait.png" alt="数字人"><video id="idle" src="./idle.mp4" muted loop playsinline preload="auto" aria-hidden="true"></video><canvas id="video" width="512" height="512" aria-hidden="true"></canvas></section></div>
+  <section id="conversation" class="conversation empty" aria-live="polite"><div class="caption"><p id="heard"></p><p id="subtitle"></p></div></section>
+  <section id="task" role="dialog" aria-label="电脑任务" tabindex="-1" hidden>
+    <div class="section-title"><span>电脑任务</span><button id="task-close" class="link" title="收起任务" aria-label="收起任务"></button></div>
+    <p id="task-empty" class="hint">暂无任务</p>
+    <select id="task-select" aria-label="选择电脑任务" hidden></select>
+    <div id="task-content" hidden><div class="task-head"><span id="task-status" role="status"></span><button id="cancel" title="停止当前任务" aria-label="停止当前任务"></button></div><p id="task-title"></p><p id="task-detail"></p><div class="task-actions"><button id="task-open" class="link" title="在 dsh 中查看任务" aria-label="在 dsh 中查看任务"></button></div></div>
+  </section>
+  <section id="memory" aria-label="长期记忆" hidden>
+    <div class="section-title"><button id="memory-back" class="link" aria-label="返回桌宠" title="返回桌宠"></button><span>长期记忆</span><button id="memory-refresh" class="link">刷新</button></div>
+    <div class="memory-toolbar"><select id="memory-project" aria-label="记忆类型"><option value="observation_project">记忆片段</option><option value="profile_project">画像记忆</option></select><button id="memory-add">新增</button></div>
+    <p id="memory-message" role="status" hidden></p>
+    <form id="memory-editor" hidden><label id="memory-editor-label" for="memory-content">新增记忆</label><textarea id="memory-content" rows="5" aria-labelledby="memory-editor-label" required></textarea><div class="memory-actions"><button id="memory-cancel" type="button">取消</button><button id="memory-save" class="primary" type="submit">保存</button></div></form>
+    <div id="memory-list"></div>
+    <div class="memory-pager"><button id="memory-prev" aria-label="上一页">上一页</button><span id="memory-count"></span><button id="memory-next" aria-label="下一页">下一页</button></div>
+    <details id="memory-profile"><summary>用户画像概览 · 只读</summary><p class="hint">画像由云端整理，修改记忆后可能仍显示旧值；同一事实在两类记忆中需分别修改。</p><div id="memory-profile-content"></div></details>
+  </section>
+  <p id="error" role="alert" hidden></p>
+  <section class="controls"><button id="text-toggle" class="link" title="文字输入">文字输入</button><button id="mic" title="麦克风" aria-label="麦克风">麦克风</button><button id="call" class="primary">开始通话</button><button id="speaker" title="扬声器" aria-label="扬声器">扬声器</button><button id="dsh" class="link" title="打开 dsh">dsh</button></section>
+  <form id="text-form" hidden><textarea id="text" rows="1" maxlength="12000" aria-label="文字消息"></textarea><button id="send" class="primary" type="submit">发送</button></form>
+  <section id="settings" hidden><div class="section-title">连接与偏好 <button id="import" class="link">导入 .env</button></div><p class="hint">导入通话配置后即可使用。</p>
+    <label><input id="top" type="checkbox"> 始终置顶</label><label><input id="gpu-enabled" type="checkbox"> 数字人视频</label>
+    <label>GPU 地址<input id="gpu-url" type="url"></label>
+    <label>dsh Web 地址<input id="dsh-url" type="url" readonly></label><p class="hint">dsh 由你自行启动和关闭。修改连接请导入包含 dsh_url 的 .env。</p>
+    <label>电脑任务默认工作目录<input id="dsh-cwd"></label><label>麦克风<select id="input-device"><option value="">系统默认</option></select></label><label>扬声器<select id="output-device"><option value="">系统默认</option></select></label>
+    <button id="save" class="primary">保存设置</button><p class="hint">更改输入设备或连接配置，请结束通话后操作。工具和模型仍在 dsh 中配置。</p>
+  </section>
+</main><script src="./index.js"></script></body></html>

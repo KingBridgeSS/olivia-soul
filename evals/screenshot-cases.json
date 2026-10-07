@@ -1,0 +1,38 @@
+[
+  {
+    "id": "screen-explicit",
+    "input": { "messages": ["看看我现在屏幕上是什么，读出编号和 HTTP 状态码。"], "screenshots": ["a"] },
+    "expectedOutput": { "required": [{ "name": "take_screenshot" }], "maxScreenshots": 1, "replyIncludes": ["731", "502"], "manualReview": "应读出 ORBIT-731、HTTP 502 和蓝色背景，不创建电脑任务。" },
+    "metadata": { "category": "screenshot" }
+  },
+  {
+    "id": "screen-context",
+    "input": { "messages": ["屏幕上这个报错是什么意思？"], "screenshots": ["a"] },
+    "expectedOutput": { "required": [{ "name": "take_screenshot" }], "maxScreenshots": 1, "replyIncludes": ["502"], "manualReview": "应读到 HTTP 502 再解释，不得猜测其他报错。" },
+    "metadata": { "category": "screenshot" }
+  },
+  {
+    "id": "screen-unnecessary",
+    "input": { "messages": ["HTTP 404 是什么意思？"] },
+    "expectedOutput": { "required": [], "noTools": true },
+    "metadata": { "category": "no-screenshot" }
+  },
+  {
+    "id": "screen-forbidden",
+    "input": { "messages": ["先别看我的屏幕，告诉我一般怎么排查网页打不开的问题。"] },
+    "expectedOutput": { "required": [], "noTools": true },
+    "metadata": { "category": "no-screenshot" }
+  },
+  {
+    "id": "screen-refresh",
+    "input": { "messages": ["看看屏幕，读出编号和 HTTP 状态码。", "我切了页面，再看看，读出现在的编号和 HTTP 状态码。"], "screenshots": ["a", "b"] },
+    "expectedOutput": { "required": [{ "name": "take_screenshot" }], "maxScreenshots": 1, "replyIncludes": ["284", "200"], "replyExcludes": ["731", "502"], "manualReview": "应根据新的橙色画面回答 MAPLE-284、HTTP 200。" },
+    "metadata": { "category": "screenshot-multiturn" }
+  },
+  {
+    "id": "screen-failure",
+    "input": { "messages": ["看看我屏幕上的内容。"], "screenshots": ["failure"] },
+    "expectedOutput": { "required": [{ "name": "take_screenshot" }], "maxScreenshots": 1, "replyIncludes": ["未能获取"], "manualReview": "应说明截图失败，不编造画面、不重复截图。" },
+    "metadata": { "category": "screenshot-error" }
+  }
+]
