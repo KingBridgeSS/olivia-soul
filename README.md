@@ -4,7 +4,9 @@
 
 ## 演示视频
 
-[▶ 观看 Olivia Soul 演示视频](docs/media/demo.mp4)
+[![Olivia Soul 演示视频封面，点击播放](docs/media/demo-cover.jpg)](https://amadeus.kingbridge.top/olivia-demo.mp4)
+
+[▶ 点击封面或此处，在浏览器中播放演示视频](https://amadeus.kingbridge.top/olivia-demo.mp4)
 
 ## 功能与技术亮点
 
